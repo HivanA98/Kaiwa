@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生活会話 — Keigo Sehari-hari di Jepang</title>
+  <meta name="description" content="Kartu latihan keigo & percakapan sehari-hari di Jepang (konbini, kereta, klinik, kantor kota, tempat kerja) dengan furigana, romaji, dan suara." />
+
+  <!-- Font Jepang (mincho untuk isi, gothic untuk UI). Fallback ke font sistem bila offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-washi">
+
+  <header class="masthead">
+    <h1 class="title">生活会話</h1>
+    <p class="subtitle">Seikatsu Kaiwa &middot; Keigo Sehari-hari di Jepang</p>
+    <p class="countdown" id="countdown" hidden></p>
+  </header>
+
+  <main class="stage">
+
+    <!-- pencarian -->
+    <div class="search">
+      <input type="search" id="search" placeholder="Cari: 袋, kantong, fukuro, sakit…  ( / )" autocomplete="off" aria-label="Cari kartu" />
+    </div>
+
+    <!-- filter kategori -->
+    <nav class="toolbar" id="filters" aria-label="Filter kategori"></nav>
+
+    <!-- filter peran + toggle tampilan -->
+    <div class="options">
+      <div class="segmented" id="roles" role="group" aria-label="Filter peran">
+        <button data-role="all" aria-pressed="true">全部<span>Semua</span></button>
+        <button data-role="聞" aria-pressed="false">聞く<span>Dengar</span></button>
+        <button data-role="話" aria-pressed="false">話す<span>Ucap</span></button>
+      </div>
+      <div class="toggles">
+        <label class="toggle"><input type="checkbox" id="tg-furigana" checked /> Furigana</label>
+        <label class="toggle"><input type="checkbox" id="tg-romaji" checked /> Romaji</label>
+        <label class="toggle" title="Teks disembunyikan, dengarkan suaranya lalu tebak artinya"><input type="checkbox" id="tg-listen" /> Mode dengar</label>
+        <label class="toggle"><input type="checkbox" id="tg-slow" /> Suara lambat</label>
+      </div>
+    </div>
+
+    <!-- progres -->
+    <div class="progress-row">
+      <span class="counter" id="counter"></span>
+      <span class="progress-track"><span class="progress-fill" id="fill"></span></span>
+    </div>
+
+    <!-- kartu -->
+    <div class="card-scene">
+      <div class="card" id="card" tabindex="0" role="button" aria-label="Kartu percakapan, klik untuk membalik">
+        <div class="face face-front">
+          <div class="badges">
+            <span class="badge" id="badge"></span>
+            <span class="role" id="role"></span>
+          </div>
+          <div class="jp-line" id="jp">Memuat…</div>
+          <button class="listen-prompt" id="listen-prompt" type="button">▶ 聞く<span>Dengarkan, lalu tebak artinya</span></button>
+          <div class="romaji-line" id="romaji"></div>
+          <div class="hint">Klik / Spasi untuk arti</div>
+          <div class="seal" aria-hidden="true">済</div>
+        </div>
+        <div class="face face-back">
+          <div class="meaning" id="meaning"></div>
+          <div class="reading" id="reading"></div>
+          <div class="reply" id="reply" hidden>
+            <span class="reply-label">返事 · Jawaban</span>
+            <div class="reply-text" id="reply-text"></div>
+          </div>
+          <div class="note" id="note"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- kontrol -->
+    <div class="controls">
+      <button class="btn" id="btn-prev">前へ<span class="k">← Sebelum</span></button>
+      <button class="btn btn-primary" id="btn-flip">意味<span class="k">Spasi · Balik</span></button>
+      <button class="btn" id="btn-learn">覚えた<span class="k">L · Kuasai</span></button>
+      <button class="btn" id="btn-next">次へ<span class="k">→ Lanjut</span></button>
+    </div>
+
+    <div class="controls controls-3">
+      <button class="btn" id="btn-speak">音声<span class="k">A · Dengar suara</span></button>
+      <button class="btn" id="btn-shuffle" aria-pressed="false">シャッフル<span class="k">S · Acak urutan</span></button>
+      <button class="btn" id="btn-hide" aria-pressed="false">未習のみ<span class="k">H · Belum hafal</span></button>
+    </div>
+
+  </main>
+
+  <!-- pemilih tema -->
+  <div class="theme-switcher" role="group" aria-label="Tema tampilan">
+    <button class="theme-dot washi"  data-theme="washi"  aria-pressed="true"  title="和紙 / Washi"></button>
+    <button class="theme-dot ai"     data-theme="ai"     aria-pressed="false" title="藍 / Indigo"></button>
+    <button class="theme-dot matcha" data-theme="matcha" aria-pressed="false" title="抹茶 / Matcha"></button>
+  </div>
+
+  <!-- data: _init.js wajib paling awal; urutan berkas = urutan kartu -->
+  <script src="data/_init.js"></script>
+  <script src="data/kihon.js"></script>
+  <script src="data/aisatsu.js"></script>
+  <script src="data/shokuba.js"></script>
+  <script src="data/konbini.js"></script>
+  <script src="data/kaimono.js"></script>
+  <script src="data/inshokuten.js"></script>
+  <script src="data/densha.js"></script>
+  <script src="data/koutsuu.js"></script>
+  <script src="data/byouin.js"></script>
+  <script src="data/yakusho.js"></script>
+  <script src="data/ginkou.js"></script>
+  <script src="data/yuubin.js"></script>
+  <script src="data/keitai.js"></script>
+  <script src="data/sumai.js"></script>
+  <script src="data/biyouin.js"></script>
+  <script src="data/denwa.js"></script>
+  <script src="data/kinkyuu.js"></script>
+  <script src="data/kouryuu.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
