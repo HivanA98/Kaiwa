@@ -51,7 +51,7 @@ lewat GitHub Pages. Data dimuat lewat `<script>`, jadi tidak ada masalah CORS di
 | `index.html` | Markup + urutan pemuatan data |
 | `style.css` | Token warna, tema, kartu 3D, ruby furigana |
 | `script.js` | Filter, pencarian, suara, progres, tema, papan ketik |
-| `data/_init.js` | `KAIWA_DATA`, daftar kategori `KAIWA_CATS`, fungsi `addCards()` |
+| `data/init.js` | `KAIWA_DATA`, daftar kategori `KAIWA_CATS`, fungsi `addCards()` |
 | `data/<kategori>.js` | Materi per kategori (satu-satunya tempat mengedit isi) |
 | `tools/validate-data.js` | Pemeriksa data (furigana, romaji, duplikat, field wajib) |
 
@@ -79,7 +79,7 @@ node tools/validate-data.js
 
 Validator menolak kanji tanpa furigana, kurung `{}` yang rusak, romaji yang tidak cocok
 dengan bacaan kana, dan kartu ganda. Kategori baru: tambahkan ke `KAIWA_CATS`
-di `data/_init.js`, buat berkas `data/<nama>.js`, lalu daftarkan di `index.html`.
+di `data/init.js`, buat berkas `data/<nama>.js`, lalu daftarkan di `index.html`.
 
 ## Catatan isi
 
